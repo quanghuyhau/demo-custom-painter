@@ -1,9 +1,10 @@
 import 'dart:ui' as ui;
+import 'package:demo_custom_painter/presentation/widgets/canvas_side_bar.dart';
+import 'package:demo_custom_painter/presentation/widgets/drawing_canvas.dart';
+import 'package:demo_custom_painter/presentation/widgets/hot_key_listener.dart';
 import 'package:flutter/material.dart';
-
-import '../../domain/models/drawing_tool.dart';
 import '../../domain/models/models.dart';
-import '../../src.dart';
+import '../../main.dart';
 import '../notifiers/current_stroke_value_notifier.dart';
 
 class DrawingPage extends StatefulWidget {
@@ -143,7 +144,7 @@ class _CustomAppBar extends StatelessWidget {
               icon: const Icon(Icons.menu),
             ),
             const Text(
-              'Let\'s Draw',
+              'Vẽ',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 19,

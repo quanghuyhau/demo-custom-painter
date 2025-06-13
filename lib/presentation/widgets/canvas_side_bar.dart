@@ -17,6 +17,7 @@ import '../../domain/models/drawing_tool.dart';
 import '../../domain/models/models.dart';
 import '../../src.dart';
 import '../notifiers/current_stroke_value_notifier.dart';
+import 'color_palette.dart';
 
 class CanvasSideBar extends StatefulWidget {
   final ValueNotifier<Color> selectedColor;
@@ -95,7 +96,7 @@ class _CanvasSideBarState extends State<CanvasSideBar> {
               children: [
                 const SizedBox(height: 10),
                 const Text(
-                  'Shapes',
+                  'Hình dạng',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 const Divider(),
@@ -109,12 +110,12 @@ class _CanvasSideBarState extends State<CanvasSideBar> {
                       selected: widget.drawingTool.value == DrawingTool.pencil,
                       onTap: () =>
                           widget.drawingTool.value = DrawingTool.pencil,
-                      tooltip: 'Pencil',
+                      tooltip: 'Bút chì',
                     ),
                     _IconBox(
                       selected: widget.drawingTool.value == DrawingTool.line,
                       onTap: () => widget.drawingTool.value = DrawingTool.line,
-                      tooltip: 'Line',
+                      tooltip: 'Đường kẻ',
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -133,14 +134,14 @@ class _CanvasSideBarState extends State<CanvasSideBar> {
                       selected: widget.drawingTool.value == DrawingTool.polygon,
                       onTap: () =>
                           widget.drawingTool.value = DrawingTool.polygon,
-                      tooltip: 'Polygon',
+                      tooltip: 'Đa giác',
                     ),
                     _IconBox(
                       iconData: FontAwesomeIcons.eraser,
                       selected: widget.drawingTool.value == DrawingTool.eraser,
                       onTap: () =>
                           widget.drawingTool.value = DrawingTool.eraser,
-                      tooltip: 'Eraser',
+                      tooltip: 'Cục tẩy',
                     ),
                     _IconBox(
                       iconData: FontAwesomeIcons.square,
@@ -154,7 +155,7 @@ class _CanvasSideBarState extends State<CanvasSideBar> {
                       selected: widget.drawingTool.value == DrawingTool.circle,
                       onTap: () =>
                           widget.drawingTool.value = DrawingTool.circle,
-                      tooltip: 'Circle',
+                      tooltip: 'Hình tròn',
                     ),
                     _IconBox(
                       iconData: FontAwesomeIcons.ruler,
@@ -169,7 +170,7 @@ class _CanvasSideBarState extends State<CanvasSideBar> {
                 Row(
                   children: [
                     const Text(
-                      'Fill Shape: ',
+                      'Điền vào hình dạng: ',
                       style: TextStyle(fontSize: 12),
                     ),
                     Checkbox(
@@ -187,7 +188,7 @@ class _CanvasSideBarState extends State<CanvasSideBar> {
                       ? Row(
                           children: [
                             const Text(
-                              'Polygon Sides: ',
+                              'Các cạnh của đa giác: ',
                               style: TextStyle(fontSize: 12),
                             ),
                             Slider(
@@ -206,7 +207,7 @@ class _CanvasSideBarState extends State<CanvasSideBar> {
                 ),
                 const SizedBox(height: 10),
                 const Text(
-                  'Colors',
+                  'Màu sắc',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 const Divider(),
@@ -215,14 +216,14 @@ class _CanvasSideBarState extends State<CanvasSideBar> {
                 ),
                 const SizedBox(height: 20),
                 const Text(
-                  'Size',
+                  'Kích thước ',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 const Divider(),
                 Row(
                   children: [
                     const Text(
-                      'Stroke Size: ',
+                      'Kích thước nét chữ:  ',
                       style: TextStyle(fontSize: 12),
                     ),
                     Slider(
@@ -238,7 +239,7 @@ class _CanvasSideBarState extends State<CanvasSideBar> {
                 Row(
                   children: [
                     const Text(
-                      'Eraser Size: ',
+                      'Kích thước tẩy:  ',
                       style: TextStyle(fontSize: 12),
                     ),
                     Slider(
@@ -253,7 +254,7 @@ class _CanvasSideBarState extends State<CanvasSideBar> {
                 ),
                 const SizedBox(height: 20),
                 const Text(
-                  'Actions',
+                  'Hành động',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 const Divider(),
@@ -263,7 +264,7 @@ class _CanvasSideBarState extends State<CanvasSideBar> {
                       onPressed: widget.allSketches.value.isNotEmpty
                           ? () => undoRedoStack.undo()
                           : null,
-                      child: const Text('Undo'),
+                      child: const Text('Hoàn tác'),
                     ),
                     ValueListenableBuilder<bool>(
                       valueListenable: undoRedoStack.canRedo,
@@ -271,12 +272,12 @@ class _CanvasSideBarState extends State<CanvasSideBar> {
                         return TextButton(
                           onPressed:
                               canRedo ? () => undoRedoStack.redo() : null,
-                          child: const Text('Redo'),
+                          child: const Text('Làm lại'),
                         );
                       },
                     ),
                     TextButton(
-                      child: const Text('Clear'),
+                      child: const Text('Xoá toàn bộ'),
                       onPressed: () => undoRedoStack.clear(),
                     ),
                     TextButton(
@@ -289,19 +290,15 @@ class _CanvasSideBarState extends State<CanvasSideBar> {
                       },
                       child: Text(
                         widget.backgroundImage.value == null
-                            ? 'Add Background'
-                            : 'Remove Background',
+                            ? 'Thêm hình nền'
+                            : 'Xoá hình nền',
                       ),
-                    ),
-                    TextButton(
-                      child: const Text('Fork on Github'),
-                      onPressed: () => _launchUrl(kGithubRepo),
                     ),
                   ],
                 ),
                 const SizedBox(height: 20),
                 const Text(
-                  'Export',
+                  'Tải về',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 const Divider(),
@@ -310,7 +307,7 @@ class _CanvasSideBarState extends State<CanvasSideBar> {
                     SizedBox(
                       width: 140,
                       child: TextButton(
-                        child: const Text('Export PNG'),
+                        child: const Text('Tải về file PNG'),
                         onPressed: () async {
                           Uint8List? pngBytes = await getBytes();
                           if (pngBytes != null) saveFile(pngBytes, 'png');
@@ -320,7 +317,7 @@ class _CanvasSideBarState extends State<CanvasSideBar> {
                     SizedBox(
                       width: 140,
                       child: TextButton(
-                        child: const Text('Export JPEG'),
+                        child: const Text('Tải về file JPEG'),
                         onPressed: () async {
                           Uint8List? pngBytes = await getBytes();
                           if (pngBytes != null) saveFile(pngBytes, 'jpeg');
@@ -331,15 +328,15 @@ class _CanvasSideBarState extends State<CanvasSideBar> {
                 ),
                 // add about me button or follow buttons
                 const Divider(),
-                Center(
-                  child: GestureDetector(
-                    onTap: () => _launchUrl('https://github.com/JideGuru'),
-                    child: const Text(
-                      'Made with 💙 by JideGuru',
-                      style: TextStyle(fontSize: 12),
-                    ),
-                  ),
-                ),
+                // Center(
+                //   child: GestureDetector(
+                //     onTap: () => _launchUrl('https://github.com/JideGuru'),
+                //     child: const Text(
+                //       'Made with 💙 by JideGuru',
+                //       style: TextStyle(fontSize: 12),
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           );

@@ -1,6 +1,6 @@
 import 'dart:math';
 import 'dart:ui' as ui;
-import 'package:demo_custom_painter/src/extensions/extensions.dart';
+import 'package:demo_custom_painter/extensions/extensions.dart';
 import 'package:flutter/material.dart';
 import '../../domain/models/models.dart';
 import '../notifiers/current_stroke_value_notifier.dart';
